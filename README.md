@@ -20,6 +20,8 @@ La comunicación no es una simple conexión WebSocket. Sigue un flujo específic
 4.  **Conexión WebSocket**: Nuestro backend devuelve estos datos al cliente. El hook `useRealtime` usa esta URL y token para establecer la conexión WebSocket directa con los servidores de OpenAI.
 5.  **Comunicación Realtime**: Una vez conectado, el cliente empieza a enviar el audio del micrófono y a recibir eventos del servidor (transcripciones, respuestas del LLM, etc.).
 
+El audio capturado por el micrófono del cliente se transmite en tiempo real a la API de OpenAI. Esta API se encarga de la transcripción de voz a texto, utilizando sus modelos de reconocimiento de voz. Una vez que el audio es procesado y transcrito, el texto resultante se envía de vuelta al cliente a través de la misma conexión WebSocket.
+
 ![Arquitectura y Flujo de Datos](public/img/mermaid-flow.png)
 
 ## Cómo Empezar
