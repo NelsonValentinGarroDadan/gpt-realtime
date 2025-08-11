@@ -20,7 +20,28 @@ La comunicación no es una simple conexión WebSocket. Sigue un flujo específic
 4.  **Conexión WebSocket**: Nuestro backend devuelve estos datos al cliente. El hook `useRealtime` usa esta URL y token para establecer la conexión WebSocket directa con los servidores de OpenAI.
 5.  **Comunicación Realtime**: Una vez conectado, el cliente empieza a enviar el audio del micrófono y a recibir eventos del servidor (transcripciones, respuestas del LLM, etc.).
 
-![Diagrama de Arquitectura](https://i.imgur.com/A31e4tJ.png)
+```mermaid
+graph TD
+    A[Cliente/Navegador] -- 1. Pide sesión a la API --> B(Servidor Next.js);
+    B -- 2. Llama a OpenAI API con la clave secreta --> C(Cloud de OpenAI);
+    C -- 3. Devuelve URL y token de sesión --> B;
+    B -- 4. Devuelve URL y token al cliente --> A;
+    A -- 5. Conexión WebRTC directa para audio/eventos --> C;
+
+    subgraph Cliente/Navegador
+        direction LR
+        A1[Componente React] -- usa --> A2(Hook useRealtime);
+    end
+
+    subgraph Servidor Next.js
+        B1[/api/realtime-token];
+    end
+
+    subgraph Cloud de OpenAI
+        C1[Real-time Sessions API];
+        C2[LLM + Voice];
+    end
+```
 
 ## Cómo Empezar
 
