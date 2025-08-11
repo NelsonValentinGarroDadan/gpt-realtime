@@ -69,7 +69,7 @@ export default function ChatInterface() {
         </button>
       </div>
        <div className="text-xs text-gray-400 text-center">
-        <p>Prueba a decir: cuéntame un chiste de programadores</p>
+        <p>Prueba a decir: "cuéntame un chiste de programadores"</p>
       </div>
     </div>
   );
